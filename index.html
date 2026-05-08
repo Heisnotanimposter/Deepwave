@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Simon Lee | General Resume | EN</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #007bff;
+            --text-color: #1a1a1a;
+            --secondary-text-color: #555;
+            --border-color: #ccc;
+            --font-family: 'Roboto', sans-serif;
+            --max-width: 900px;
+        }
+
+        /* Base Styling */
+        body {
+            font-family: var(--font-family);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            font-size: 11pt;
+        }
+
+        .resume-container {
+            width: 100%;
+            max-width: var(--max-width);
+            background: white;
+            padding: 40px;
+            margin: 20px auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation Feature (Sticky Header) */
+        .main-header {
+            background: var(--text-color);
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky; 
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navigation {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+        }
+        
+        /* Language Switcher Styling */
+        .language-switcher {
+            display: flex;
+            gap: 5px;
+        }
+        .lang-button {
+            background: none;
+            color: white;
+            border: 1px solid white;
+            padding: 5px 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .lang-button.active, .lang-button:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.2s; 
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px); 
+        }
+
+        /* Typography & Layout */
+        h1 {
+            font-size: 2.2em;
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        /* Contact/Header Info */
+        .contact-info {
+            text-align: center;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        .contact-info span {
+            margin: 0 10px;
+        }
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        /* Section Layout */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .project-item, .social-item, .cert-item, .lang-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .project-item h3 {
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+        .project-item p, .cert-item p, .lang-item p {
+            margin: 0 0 5px 0;
+            font-size: 0.95em;
+        }
+
+        /* Animation Feature (Fade In) */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated-section p {
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        /* Button OnClick Method Styling */
+        /*.action-area {
+            text-align: center;
+            margin-top: 20px;
+        }*/
+
+        .action-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8em;
+            color: var(--secondary-text-color);
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navigation">
+            <div>
+                <a href="#summary-sec" class="nav-link" data-key="nav_summary">Summary</a>
+                <a href="#projects-sec" class="nav-link" data-key="nav_projects">Projects</a>
+                <a href="#running-projects-sec" class="nav-link" data-key="nav_running_projects">Running Services</a>
+                <a href="#certs-sec" class="nav-link" data-key="nav_certs">Certifications</a>
+                <a href="#links-sec" class="nav-link" data-key="nav_links">Links</a>
+            </div>
+            <div class="language-switcher">
+                <button class="lang-button active" data-lang="en">EN</button>
+                <button class="lang-button" data-lang="kor">KOR</button>
+                <button class="lang-button" data-lang="jp">JP</button>
+                <button class="lang-button" data-lang="chn">CHN</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="resume-container">
+
+        <header id="summary-sec">
+            <h1 id="header-name" data-key="header_name">Simon Lee</h1>
+            
+            <div class="contact-info">
+                <span>Email: <a href="mailto:redcar1024@gmail.com">redcar1024@gmail.com</a></span>
+                <span class="separator">|</span>
+                <span>Line ID: ngc1024</span>
+                <span class="separator">|</span>
+                <span>Kakao ID: redcar359</span>
+                <span class="separator">|</span>
+                <span><span data-key="contact_location">Location</span>: South Korea</span>
+            </div>
+        </header>
+
+        <section class="section animated-section">
+            <h2 data-key="h2_summary">Summary</h2>
+            <p id="p_summary_1" class="animated-text">Hello, good day! I'm no longer focused solely on learning Python. Instead, I've decided to study computer science in general. I'm particularly passionate about robotics and bioengineering.</p>
+            <p id="p_summary_2" style="margin-top: 10px;">I am currently seeking opportunities to advance my computer science career on a global scale.</p>
+            
+
+        </section>
+
+        <section class="section" id="projects-sec">
+            <h2 data-key="h2_projects">Projects</h2>
+            
+            <div class="project-item">
+                <h3 data-key="proj_title_1">SPIED2024 TimeIncreasingCrosswalk</h3>
+                <p data-key="proj_desc_1">IRE ASIA Consortium certified GrandPrize: Face Recognition and System with dynamic timer interactive to crosswalkers.</p>
+                <p>GitHub: <a href="https://github.com/Heisnotanimposter/SPIED2024_TimeIncreasingCrosswalk" target="_blank">Heisnotanimposter/SPIED2024_TimeIncreasingCrosswalk</a></p>
+            </div>
+            <div class="project-item">
+                <h3 data-key="proj_title_2">ARC-2025 project</h3>
+                <p data-key="proj_desc_2">Final Entry Rank : 179 of 1456 teams</p>
+                <p>GitHub: <a href="https://github.com/OpenOurMinds/ARCprize2025_HIN" target="_blank">Heisnotanimposter/OpenOurMinds/ARCprize2025_HIN</a></p>
+            </div>          
+            <div class="project-item">
+                <h3 data-key="proj_title_3">RaspberryPi Robotics Project</h3>
+                <p data-key="proj_desc_3">Hardware control and system integration using Raspberry Pi.</p>
+                <p>GitHub: <a href="https://github.com/Heisnotanimposter/RPI" target="_blank">Heisnotanimposter/RPI</a></p>
+            </div>
+
+            <div class="project-item">
+                <h3 data-key="proj_title_4">Autonomous Driving Object Detection Project</h3>
+                <p data-key="proj_desc_4">Implementation of Object Detection techniques, likely using YOLOv5 for autonomous systems.</p>
+                <p>GitHub: <a href="https://github.com/Heisnotanimposter/Totalcare_autonomous_driving_Yolov5" target="_blank">Heisnotanimposter/Totalcare_autonomous_driving_Yolov5</a></p>
+            </div>
+
+            <div class="project-item">
+                <h3 data-key="proj_title_5">Satellite Image Based Time-series Prediction Project</h3>
+                <p data-key="proj_desc_5">Modeling and prediction based on time-series data derived from satellite imagery.</p>
+                <p>GitHub: <a href="https://github.com/Heisnotanimposter/AIAD_weather2" target="_blank">Heisnotanimposter/AIAD_weather2</a></p>
+            </div>
+            
+            <div class="project-item">
+                <h3 data-key="proj_title_6">BioPython Project</h3>
+                <p data-key="proj_desc_6">Computational biology project utilizing the BioPython library for genetic analysis.</p>
+                <p>GitHub: <a href="https://github.com/Heisnotanimposter/GeneLab" target="_blank">Heisnotanimposter/GeneLab</a></p>
+            </div>
+            
+            <div class="project-item">
+                <h3 data-key="proj_title_7">Crypto-Based Quant Project</h3>
+                <p data-key="proj_desc_7">Quantitative analysis and trading strategy development focused on cryptocurrency markets.</p>
+                <p>GitHub: <a href="https://github.com/Heisnotanimposter/Upbit-Quant" target="_blank">Heisnotanimposter/Upbit-Quant</a></p>
+            </div>
+
+        </section>
+
+        <section class="section" id="running-projects-sec">
+            <h2 data-key="h2_running_projects">Running Services (Active Apps)</h2> 
+            
+            <div class="project-item">
+                <h3 data-key="app_title_1">AutoML Ops Platform</h3>
+                <p data-key="app_desc_1">A live operational service showcasing automated machine learning deployment pipelines.</p>
+                <p>Service URL: <a href="https://automl-ops-platform-325161758424.us-west1.run.app/" target="_blank">https://automl-ops-platform-325161758424.us-west1.run.app/</a></p>
+            </div>
+            <div class="project-item">
+                <h3 data-key="app_title_2">MarketPulse Sentiment Analysis</h3>
+                <p data-key="app_desc_2">A stock market sentiment analysis application providing real-time market insights.</p>
+                <p>Service URL: <a href="https://marketpulse-533270964817.us-west1.run.app/" target="_blank">https://marketpulse-533270964817.us-west1.run.app/</a></p>
+            </div>
+        </section>
+        
+        <section class="section" id="certs-sec">
+            <h2 data-key="h2_certs">Certifications</h2>
+            <div class="cert-item">
+                <p><strong data-key="cert_processor_title">HRD - Industrial Information Processor:</strong> <span data-key="cert_processor_desc">South Korean National Technical Qualification.</span></p>
+            </div>
+            <div class="cert-item">
+                <p><strong data-key="cert_adsp_title">KDATA - ADSP (Advanced Data Analytics Semi Professional):</strong> <span data-key="cert_adsp_desc">Data analysis and processing certification.</span></p>
+            </div>
+            <div class="cert-item">
+                <p><strong data-key="cert_opic_title">OPIC IH (Oral Proficiency Interview – Computer):</strong> <span data-key="cert_opic_desc">Speaking test score.</span></p>
+            </div>
+            <div class="cert-item">
+                <p><strong data-key="cert_ielts_title">IELTS 6.5 Mock Test Score:</strong> <span data-key="cert_ielts_desc">English proficiency test score.</span></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 data-key="h2_langs">Languages</h2>
+            <div class="lang-item">
+                <p><strong data-key="lang_kor_title">Korean:</strong> <span data-key="lang_kor_desc">Native.</span></p>
+            </div>
+            <div class="lang-item">
+                <p><strong data-key="lang_eng_title">English:</strong> <span data-key="lang_eng_desc">Advanced (IELTS 6.5 level equivalent).</span></p>
+            </div>
+        </section>
+
+        <section class="section" id="links-sec">
+            <h2 data-key="h2_links">Online Presence</h2>
+            
+            <div class="social-item">
+                <p><strong data-key="link_linkedin">LinkedIn:</strong> <a href="https://www.linkedin.com/in/simon-lee-003689288/" target="_blank">Simon Lee LinkedIn Profile</a></p>
+            </div>
+            <div class="social-item">
+                <p><strong data-key="link_huggingface">HuggingFace:</strong> <a href="https://huggingface.co/ngc1024" target="_blank">ngc1024 HuggingFace Page</a></p>
+            </div>
+            <div class="social-item">
+                <p><strong data-key="link_github">GitHub:</strong> <a href="https://github.com/Heisnotanimposter" target="_blank">Heisnotanimposter GitHub Profile</a></p>
+            </div>
+        </section>
+        
+        <div class="footer">
+            &copy; 2024 Rights Reserved By Simon Lee
+        </div>
+
+    </div>
+
+    <script>
+        const translations = {
+            'en': {
+                'title_suffix': 'EN',
+                'header_name': 'Simon Lee',
+                'nav_summary': 'Summary', 'nav_projects': 'Projects', 'nav_certs': 'Certifications', 'nav_links': 'Links',
+                'contact_location': 'Location',
+                'h2_summary': 'Summary',
+                'p_summary_1': 'Hello, good day! I am no longer focused solely on learning Python. Instead, I have decided to study computer science in general. I am particularly passionate about robotics and bioengineering.',
+                'p_summary_2': 'I am currently seeking opportunities to advance my computer science career on a global scale.',
+                'btn_focus': '',
+                'alert_focus': 'Core Focus: Robotics, BioEngineering, and General Computer Science.',
+                'h2_projects': 'Projects',
+                'proj_title_1': 'SPIED2024 TimeIncreasingCrosswalk', 'proj_desc_1': 'IRE ASIA Consortium certified GrandPrize: Face Recognition and System with dynamic timer interactive to crosswalkers.',
+                'proj_title_2': 'ARC-2025 project', 'proj_desc_2': 'Final Entry Rank : 179 of 1456 teams', 
+                'proj_title_3': 'RaspberryPi Robotics Project', 'proj_desc_3': 'Hardware control and system integration using Raspberry Pi.',
+                'proj_title_4': 'Autonomous Driving Object Detection Project', 'proj_desc_4': 'Implementation of Object Detection techniques, likely using YOLOv5 for autonomous systems.',
+                'proj_title_5': 'Satellite Image Based Time-series Prediction Project', 'proj_desc_5': 'Modeling and prediction based on time-series data derived from satellite imagery.',
+                'proj_title_6': 'BioPython Project', 'proj_desc_6': 'Computational biology project utilizing the BioPython library for genetic analysis.',
+                'proj_title_7': 'Crypto-Based Quant Project', 'proj_desc_7': 'Quantitative analysis and trading strategy development focused on cryptocurrency markets.',
+                'h2_running_projects': 'Running Services (Active Apps)', //  
+                'app_title_1': 'AutoML Ops Platform', 'app_desc_1': 'A live operational service showcasing automated machine learning deployment pipelines.', //  1)
+                'app_title_2': 'MarketPulse Sentiment Analysis', 'app_desc_2': 'A stock market sentiment analysis application providing real-time market insights.', //  2)
+                'h2_certs': 'Certifications',
+                'cert_processor_title': 'HRD - Industrial Information Processor:', 'cert_processor_desc': 'South Korean National Technical Qualification.',
+                'cert_adsp_title': 'KDATA - ADSP (Advanced Data Analytics Semi Professional):', 'cert_adsp_desc': 'Data analysis and processing certification.', // 
+                'cert_opic_title': 'OPIC IH (Oral Proficiency Interview – Computer):', 'cert_opic_desc': 'Speaking test score.',
+                'cert_ielts_title': 'IELTS 6.5 Mock Test Score:', 'cert_ielts_desc': 'English proficiency test score.',
+                'h2_langs': 'Languages',
+                'lang_kor_title': 'Korean:', 'lang_kor_desc': 'Native.',
+                'lang_eng_title': 'English:', 'lang_eng_desc': 'Advanced (IELTS 6.5 level equivalent).',
+                'h2_links': 'Online Presence',
+                'link_linkedin': 'LinkedIn:', 'link_huggingface': 'HuggingFace:', 'link_github': 'GitHub:',
+            },
+            'kor': {
+                'title_suffix': 'KOR',
+                'header_name': 'Seungwon Lee (이승원)',
+                'nav_summary': '개요', 'nav_projects': '프로젝트', 'nav_certs': '자격증', 'nav_links': '온라인',
+                'contact_location': '위치',
+                'h2_summary': '개요',
+                'p_summary_1': '안녕하세요, 좋은 하루 되세요! 저는 이제 더 이상 파이썬 학습에만 집중하지 않습니다. 대신, 저는 컴퓨터 과학 전반을 배우기로 결정했습니다. 특히 로봇 공학과 생물공학 분야를 열정적으로 탐구하고 있습니다.',
+                'p_summary_2': '저는 현재 글로벌 규모로 컴퓨터 과학 경력을 발전시킬 기회를 모색하고 있습니다.',
+                'btn_focus': '핵심 관심사 보기',
+                'alert_focus': '핵심 관심사: 로보틱스, 생명 공학, 일반 컴퓨터 과학.',
+                'h2_projects': '프로젝트',
+                'proj_title_1': 'SPIED2024 시간증가 횡단보도', 'proj_desc_1': 'IRE ASIA Consortium 그랑프리 인증: 보행자를 위한 동적 타이머 상호 작용 기능이 있는 얼굴 인식 및 시스템.',
+                'proj_title_2': 'ARC-2025 프로젝트', 'proj_desc_2': '최종 참가 랭크 : 1456팀 중 179번째 팀', // 
+                'proj_title_3': '라즈베리파이 로보틱스 프로젝트', 'proj_desc_3': '라즈베리파이를 사용한 하드웨어 제어 및 시스템 통합.',
+                'proj_title_4': '자율 주행 객체 감지 프로젝트', 'proj_desc_4': '자율 시스템을 위한 YOLOv5를 활용한 객체 감지 기술 구현.',
+                'proj_title_5': '위성 이미지 기반 시계열 예측 프로젝트', 'proj_desc_5': '위성 이미지에서 파생된 시계열 데이터를 기반으로 한 모델링 및 예측.',
+                'proj_title_6': 'BioPython 프로젝트', 'proj_desc_6': '유전 분석을 위한 BioPython 라이브러리를 활용한 전산 생물학 프로젝트.',
+                'proj_title_7': '암호화폐 기반 퀀트 프로젝트', 'proj_desc_7': '암호화폐 시장에 중점을 둔 정량적 분석 및 거래 전략 개발.',
+                'h2_running_projects': '운영 중인 서비스 (Active Apps)', //  
+                'app_title_1': 'AutoML Ops 플랫폼', 'app_desc_1': '자동화된 머신러닝 배포 파이프라인을 보여주는 실시간 운영 서비스.', //  1)
+                'app_title_2': '마켓펄스 심리 분석', 'app_desc_2': '실시간 시장 통찰력을 제공하는 주식 시장 심리 분석 애플리케이션.', //  2)
+                'h2_certs': '자격증',
+                'cert_processor_title': 'HRD - 장보처리산업기사:', 'cert_processor_desc': '대한민국 국가 기술 자격증.',
+                'cert_adsp_title': 'KDATA - ADSP (데이터 분석 준전문가):', 'cert_adsp_desc': '데이터 분석 및 처리 자격증.', // 
+                'cert_opic_title': 'OPIC IH (오픽 IH):', 'cert_opic_desc': '말하기 시험 점수.',
+                'cert_ielts_title': 'IELTS 6.5 모의 테스트 점수:', 'cert_ielts_desc': '영어 능력 시험 점수.',
+                'h2_langs': '언어',
+                'lang_kor_title': '한국어:', 'lang_kor_desc': '원어민.',
+                'lang_eng_title': '영어:', 'lang_eng_desc': '상급 (IELTS 6.5 레벨 상당).',
+                'h2_links': '온라인 활동',
+                'link_linkedin': '링크드인:', 'link_huggingface': '허깅페이스:', 'link_github': 'GitHub:',
+            },
+            'jp': {
+                'title_suffix': 'JP',
+                'header_name': 'イ・スンウォン (Simon Lee)',
+                'nav_summary': '概要', 'nav_projects': 'プロジェクト', 'nav_certs': '資格', 'nav_links': 'リンク',
+                'contact_location': '場所',
+                'h2_summary': '概要',
+                'p_summary_1': 'こんにちは、良い一日になろう！私はもうPythonの学習に集中していません。代わりに、私はコンピュータサイエンス全体を学ぶことにしました。特にロボット工学と生物工学の分野を情熱的に探求しています。',
+                'p_summary_2': '私は現在、グローバルな規模でコンピュータサイエンスのキャリアを進展させる機会を探しています。',
+                'btn_focus': '主要な焦点を見る',
+                'alert_focus': '主要な焦点：ロボティクス、バイオエンジニアリング、および一般コンピューター科学。',
+                'h2_projects': 'プロジェクト',
+                'proj_title_1': 'SPIED2024 時間増加横断歩道', 'proj_desc_1': 'IRE ASIAコンソーシアム認定グランプリ：歩行者との動的タイマーインタラクティブ機能を備えた顔認識およびシステム。',
+                'proj_title_2': 'ARC-2025プロジェクト', 'proj_desc_2': '最終エントリースコア：1456点中179点', 
+                'proj_title_3': 'RaspberryPi ロボティクスプロジェクト', 'proj_desc_3': 'Raspberry Piを使用したハードウェア制御とシステム統合。',
+                'proj_title_4': '自動運転物体検出プロジェクト', 'proj_desc_4': '自律システム向けのYOLOv5を使用した物体検出技術の実装。',
+                'proj_title_5': '衛星画像に基づく時系列予測プロジェクト', 'proj_desc_5': '衛星画像から派生した時系列データに基づくモデリングと予測。',
+                'proj_title_6': 'BioPythonプロジェクト', 'proj_desc_6': 'BioPythonライブラリを利用した遺伝子解析のための計算生物学プロジェクト。',
+                'proj_title_7': '暗号通貨ベースのクオンツプロジェクト', 'proj_desc_7': '暗号通貨市場に焦点を当てた定量分析および取引戦略の開発。',
+                'h2_running_projects': '実行中のサービス (アクティブアプリ)', //  
+                'app_title_1': 'AutoML Ops プラットフォーム', 'app_desc_1': '自動機械学習デプロイメントパイプラインを示すライブ運用サービス。', //  1)
+                'app_title_2': 'マーケットパルス感情分析', 'app_desc_2': 'リアルタイムの市場洞察を提供する株式市場の感情分析アプリケーション。', //  2)
+                'h2_certs': '資格',
+                'cert_processor_title': 'HRD - 情報処理産業技能士:', 'cert_processor_desc': '韓国の国家技術資格。',
+                'cert_adsp_title': 'KDATA - ADSP (データ分析準専門家):', 'cert_adsp_desc': 'データ分析および処理資格。', // 
+                'cert_opic_title': 'OPIC IH (オーピック IH):', 'cert_opic_desc': 'スピーキングテストのスコア。',
+                'cert_ielts_title': 'IELTS 6.5 模擬テストスコア:', 'cert_ielts_desc': '英語能力試験のスコア。',
+                'h2_langs': '言語',
+                'lang_kor_title': '韓国語:', 'lang_kor_desc': 'ネイティブ。',
+                'lang_eng_title': '英語:', 'lang_eng_desc': '上級 (IELTS 6.5レベル相当)。',
+                'h2_links': 'オンラインプレゼンス',
+                'link_linkedin': 'LinkedIn:', 'link_huggingface': 'HuggingFace:', 'link_github': 'GitHub:',
+            },
+            'chn': {
+                'title_suffix': 'CHN',
+                'header_name': '李承洹 (Simon Lee)',
+                'nav_summary': '概要', 'nav_projects': '项目', 'nav_certs': '证书', 'nav_links': '链接',
+                'contact_location': '位置',
+                'h2_summary': '概要',
+                'p_summary_1': '大家好，祝您有美好的一天！我现在不再专注于学习Python。相反，我决定学习整个通用计算机科学领域。特别是，热情地探索机器人技术和生物工程领域。',
+                'p_summary_2': '我目前正在寻求在全球范围内发展我的计算机科学职业生涯的机会。',
+                'btn_focus': '查看核心焦点',
+                'alert_focus': '核心焦点: 机器人技术、生物工程和通用计算机科学。',
+                'h2_projects': '项目',
+                'proj_title_1': 'SPIED2024 延时增加人行横道', 'proj_desc_1': 'IRE ASIA 联盟认证大奖：具有动态定时器与行人交互的面部识别系统。',
+                'proj_title_2': 'ARC-2025 项目', 'proj_desc_2': '最终参赛分数 : 1456 分中的 179 分', 
+                'proj_title_3': 'RaspberryPi 机器人项目', 'proj_desc_3': '使用 Raspberry Pi 进行硬件控制和系统集成。',
+                'proj_title_4': '自动驾驶物体检测项目', 'proj_desc_4': '实现物体检测技术，可能使用 YOLOv5 进行自动驾驶系统。',
+                'proj_title_5': '基于卫星图像的时间序列预测项目', 'proj_desc_5': '基于卫星图像派生的时间序列数据的建模和预测。',
+                'proj_title_6': 'BioPython 项目', 'proj_desc_6': '利用 BioPython 库进行遗传分析的计算生物学项目。',
+                'proj_title_7': '基于加密货币的量化项目', 'proj_desc_7': '专注于加密货币市场的定量分析和交易策略开发。',
+                'h2_running_projects': '运行服务 (活跃应用)', //  
+                'app_title_1': 'AutoML Ops 平台', 'app_desc_1': '展示自动化机器学习部署管道的实时运营服务。', //  1)
+                'app_title_2': '市场脉搏情绪分析', 'app_desc_2': '提供实时市场洞察的股票市场情绪分析应用程序。', //  2)
+                'h2_certs': '证书',
+                'cert_processor_title': 'HRD - 工业信息处理师:', 'cert_processor_desc': '韩国国家技术资格。',
+                'cert_adsp_title': 'KDATA - ADSP (数据分析准专业人员):', 'cert_adsp_desc': '数据分析和处理认证。', // 
+                'cert_opic_title': 'OPIC IH (口语水平测试 - 电脑):', 'cert_opic_desc': '口语考试成绩。',
+                'cert_ielts_title': 'IELTS 6.5 模拟考试成绩:', 'cert_ielts_desc': '英语能力考试成绩。',
+                'h2_langs': '语言',
+                'lang_kor_title': '韩语:', 'lang_kor_desc': '母语。',
+                'lang_eng_title': '英语:', 'lang_eng_desc': '高级 (相当于IELTS 6.5级)。',
+                'h2_links': '在线形象',
+                'link_linkedin': '领英:', 'link_huggingface': 'HuggingFace:', 'link_github': 'GitHub:',
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Function to update all text content based on the selected language
+        function updateContent(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // 1. Update Title and Header Name
+            document.getElementById('page-title').textContent = `Simon Lee | General Resume | ${t.title_suffix}`;
+            document.getElementById('header-name').textContent = t.header_name; // Set the H1 name dynamically
+            
+            // 2. Update Elements using data-key (Nav, H2, Certs, Langs, Projects, etc.)
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (key !== 'header_name' && t[key]) { // Skip header_name here as it's updated above
+                    el.innerHTML = t[key]; // Use innerHTML to allow for bold/italic/links in translation strings
+                }
+            });
+
+            // 3. Update Paragraphs and Button
+            document.getElementById('p_summary_1').innerHTML = t.p_summary_1;
+            document.getElementById('p_summary_2').innerHTML = t.p_summary_2;
+            
+            // Update active button state
+            document.querySelectorAll('.lang-button').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize content to English (default)
+            updateContent(currentLang);
+
+            // 1. Language Switcher Logic
+            document.querySelectorAll('.lang-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const newLang = this.getAttribute('data-lang');
+                    updateContent(newLang);
+                });
+            });
+            
+            // 2. Smooth Navigation Feature
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // 3. Button OnClick Method
+            const alertButton = document.getElementById('alert-button');
+            if (alertButton) {
+                alertButton.addEventListener('click', () => {
+                    // Get the dynamic alert text from the data attribute
+                    const alertText = alertButton.getAttribute('data-alert-text');
+                    alert(alertText);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
