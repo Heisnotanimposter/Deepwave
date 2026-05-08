@@ -1,0 +1,42 @@
+baseURL = 'https://heisnotanimposter.github.io/'
+languageCode = 'en-us'
+title = 'Seungwon Lee | Systems AI Engineer'
+theme = 'PaperMod'
+
+[params]
+  defaultTheme = "dark"
+  disableThemeToggle = true
+  disableScrollToTop = true
+  ShowReadingTime = false
+  ShowShareButtons = false
+  ShowPostNavLinks = false
+  ShowBreadCrumbs = false
+  ShowCodeCopyButtons = true
+  disableSpecial1stPost = true
+
+  [params.profileMode]
+    enabled = true
+    title = "Translating complex statistical algorithms into bare-metal AI infrastructure."
+    subtitle = "Specializing in C++, CUDA optimization, and distributed ML systems. Expected dual B.S. in Statistics & AI (2028)."
+    
+    [[params.profileMode.buttons]]
+      name = "GitHub (1.5k+ Commits)"
+      url = "https://github.com/heisnotanimposter"
+    [[params.profileMode.buttons]]
+      name = "LeetCode (Top 5% in C++)"
+      url = "https://leetcode.com/"
+    [[params.profileMode.buttons]]
+      name = "Resume (PDF)"
+      url = "/resume.pdf"
+
+[menu]
+  [[menu.main]]
+    identifier = "projects"
+    name = "Benchmarks & Projects"
+    url = "/projects/"
+    weight = 10
+  [[menu.main]]
+    identifier = "posts"
+    name = "Research Notes"
+    url = "/posts/"
+    weight = 20

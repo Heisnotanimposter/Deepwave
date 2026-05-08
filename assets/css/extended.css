@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+    --font: 'Inter', sans-serif;
+    --code-font: 'JetBrains Mono', monospace;
+}
+
+body {
+    font-family: var(--font);
+    background-color: #0d1117; /* Deep metal black */
+    color: #c9d1d9;
+}
+
+code, pre {
+    font-family: var(--code-font) !important;
+}
+
+/* Minimalist tweaks for Trust Signals (Buttons) */
+.profile_inner .profile_buttons .button {
+    font-family: var(--code-font);
+    font-size: 0.85rem;
+    border-radius: 4px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    box-shadow: none;
+    transition: all 0.2s ease;
+}
+
+.profile_inner .profile_buttons .button:hover {
+    background: #21262d;
+    border-color: #8b949e;
+}
