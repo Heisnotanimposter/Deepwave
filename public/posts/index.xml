@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Seungwon Lee | Systems AI Engineer</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Seungwon Lee | Systems AI Engineer</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Benchmarking L1 Cache Latency in Custom CUDA Kernels</title>
+      <link>http://localhost:1313/posts/l1-cache-latency/</link>
+      <pubDate>Wed, 06 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/l1-cache-latency/</guid>
+      <description>&lt;p&gt;A brutal deep-dive into the architectural nuances of NVIDIA L1 cache management when designing custom fused kernels for transformer inference.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(Full article drafting in progress&amp;hellip;)&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deriving the Backpropagation Calculus for a Custom C&#43;&#43; Autograd Engine</title>
+      <link>http://localhost:1313/posts/backprop-calculus/</link>
+      <pubDate>Fri, 01 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/backprop-calculus/</guid>
+      <description>&lt;p&gt;Walking through the vector calculus required to build a reverse-mode automatic differentiation engine from scratch in bare-metal C++.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(Full article drafting in progress&amp;hellip;)&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

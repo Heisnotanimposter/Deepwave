@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>C&#43;&#43; on Seungwon Lee | Systems AI Engineer</title>
+    <link>http://localhost:1313/tags/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on Seungwon Lee | Systems AI Engineer</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CUDA-ParticleFilter</title>
+      <link>http://localhost:1313/projects/cuda-particlefilter/</link>
+      <pubDate>Fri, 08 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/cuda-particlefilter/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;GPU-Accelerated Monte Carlo Localization Engine.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Implemented shared-memory tiling to bypass global memory bandwidth bottlenecks, dropping latency from 80ms to 1.2ms.&lt;/p&gt;
+&lt;h2 id=&#34;performance-benchmark&#34;&gt;Performance Benchmark&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Baseline (CPU)  : 80.0 ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Optimized (GPU) :  1.2 ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Speedup         : 66.6x
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note: Achieved zero shared memory bank conflicts.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Core Open Source Contributions</title>
+      <link>http://localhost:1313/projects/open-source/</link>
+      <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/open-source/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Upstream Infrastructure Contributions.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Focus on memory leak resolution and CUDA kernel optimization in industry-standard inference engines.&lt;/p&gt;
+&lt;h2 id=&#34;merged-pull-requests&#34;&gt;Merged Pull Requests&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;vLLM/#1337&lt;/code&gt;: Optimized PagedAttention kernel register usage, reducing memory footprint by 15%.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;llama.cpp/#402&lt;/code&gt;: Fixed dangling pointer in GGML quantization routines.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Deriving the Backpropagation Calculus for a Custom C&#43;&#43; Autograd Engine</title>
+      <link>http://localhost:1313/posts/backprop-calculus/</link>
+      <pubDate>Fri, 01 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/backprop-calculus/</guid>
+      <description>&lt;p&gt;Walking through the vector calculus required to build a reverse-mode automatic differentiation engine from scratch in bare-metal C++.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(Full article drafting in progress&amp;hellip;)&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
