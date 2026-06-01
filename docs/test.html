@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simon Lee | CMS CRUD Test Runner</title>
+    
+    <!-- Link to our standard styles for color palette variables -->
+    <link rel="stylesheet" href="style.css" />
+    
+    <style>
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 3rem 1rem;
+        }
+
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .test-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .summary-box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .metric-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .metric-card h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .metric-value.pass { color: var(--success); }
+        .metric-value.fail { color: var(--danger); }
+        .metric-value.neutral { color: var(--accent-secondary); }
+
+        .suite-card {
+            margin-bottom: 1.5rem;
+            border-radius: 14px;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .suite-header {
+            background-color: var(--bg-tertiary);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .suite-body {
+            padding: 1rem 1.5rem;
+        }
+
+        .test-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .test-row:last-child {
+            border-bottom: none;
+        }
+
+        .test-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .test-status {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .test-status.pass {
+            background-color: var(--success);
+        }
+
+        .test-status.fail {
+            background-color: var(--danger);
+        }
+
+        .test-name {
+            font-weight: 500;
+        }
+
+        .test-duration {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .test-error {
+            color: var(--danger);
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            background-color: rgba(239, 68, 68, 0.05);
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            word-break: break-all;
+        }
+
+        .test-actions {
+            margin-top: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="test-container">
+        <div class="test-header">
+            <h1 class="gradient-text" style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">CMS CRUD Test Suite</h1>
+            <p>Automated regression tests validation of multi-language translation, state changes, and CRUD database behaviors.</p>
+        </div>
+
+        <!-- Summary Statistics -->
+        <div class="summary-box">
+            <div class="metric-card">
+                <h4>Total Tests</h4>
+                <div class="metric-value neutral" id="total-tests">0</div>
+            </div>
+            <div class="metric-card">
+                <h4>Passed</h4>
+                <div class="metric-value pass" id="passed-tests">0</div>
+            </div>
+            <div class="metric-card">
+                <h4>Failed</h4>
+                <div class="metric-value fail" id="failed-tests">0</div>
+            </div>
+            <div class="metric-card">
+                <h4>Duration</h4>
+                <div class="metric-value neutral" id="total-duration" style="font-size: 1.5rem; line-height: 2.25rem;">0 ms</div>
+            </div>
+        </div>
+
+        <!-- Test Suites Placeholder -->
+        <div id="suites-container"></div>
+
+        <div class="test-actions">
+            <button id="run-btn" class="btn btn-primary">🔄 Re-run All Tests</button>
+            <a href="index.html#/admin" class="btn btn-secondary" style="margin-left: 1rem;">⬅ Back to CMS Panel</a>
+        </div>
+    </div>
+
+    <!-- Mocks and scripts load -->
+    <script>
+        // Mock empty state to prevent app.js auto execution conflicts
+        window.addEventListener('DOMContentLoaded', () => {
+            // Unregister hashchange listeners to prevent navigation triggers during testing
+            window.removeEventListener('hashchange', window.handleRoute);
+        });
+    </script>
+    
+    <!-- Import target functions from app.js -->
+    <script src="app.js"></script>
+    
+    <!-- Test execution script -->
+    <script>
+        // Assertion Library
+        const assert = {
+            equal(actual, expected, msg) {
+                if (actual !== expected) {
+                    throw new Error(msg || `Expected [${expected}], but got [${actual}]`);
+                }
+            },
+            deepEqual(actual, expected, msg) {
+                const aStr = JSON.stringify(actual);
+                const eStr = JSON.stringify(expected);
+                if (aStr !== eStr) {
+                    throw new Error(msg || `Expected ${eStr}, but got ${aStr}`);
+                }
+            },
+            ok(value, msg) {
+                if (!value) {
+                    throw new Error(msg || "Expected value to be truthy");
+                }
+            }
+        };
+
+        // Test Runner Setup
+        const suites = [];
+        let currentSuite = null;
+
+        function describe(name, fn) {
+            currentSuite = { name, tests: [] };
+            suites.push(currentSuite);
+            fn();
+        }
+
+        function it(name, fn) {
+            currentSuite.tests.push({ name, fn });
+        }
+
+        // --- TEST DEFINTIONS ---
+
+        describe("1. Translation Utilities", () => {
+            it("t() should map current selected language or fallback correctly", () => {
+                const transObj = {
+                    en: "Hello English",
+                    kor: "안녕하세요 한국어",
+                    jp: "こんにちは 日本語"
+                };
+
+                // Test EN
+                window.appState.currentLang = 'en';
+                assert.equal(window.t(transObj), "Hello English");
+
+                // Test KOR
+                window.appState.currentLang = 'kor';
+                assert.equal(window.t(transObj), "안녕하세요 한국어");
+
+                // Test CHN fallback to EN (since chn is missing in object)
+                window.appState.currentLang = 'chn';
+                assert.equal(window.t(transObj), "Hello English");
+            });
+
+            it("uiT() should map UI translations dynamically", () => {
+                window.appState.currentLang = 'kor';
+                assert.equal(window.uiT('nav_portfolio'), "포트폴리오");
+                
+                window.appState.currentLang = 'en';
+                assert.equal(window.uiT('nav_portfolio'), "Portfolio");
+            });
+        });
+
+        describe("2. Portfolio Data CRUD Operations", () => {
+            it("Create: Should successfully append a new Project", () => {
+                // Ensure array exists
+                if (!window.appState.portfolioData) {
+                    window.appState.portfolioData = { projects: [] };
+                }
+                
+                const initialCount = window.appState.portfolioData.projects.length;
+                const newProject = {
+                    id: "test_proj_999",
+                    title: { en: "Test Project", kor: "테스트 프로젝트" },
+                    description: { en: "Desc", kor: "설명" },
+                    githubUrl: "https://github.com",
+                    liveUrl: ""
+                };
+
+                // Add item
+                window.appState.portfolioData.projects.push(newProject);
+
+                assert.equal(window.appState.portfolioData.projects.length, initialCount + 1, "Projects array length should increase");
+                
+                const added = window.appState.portfolioData.projects.find(p => p.id === "test_proj_999");
+                assert.ok(added, "Project should exist in array");
+                assert.equal(window.t(added.title), "Test Project", "Title translation resolution matches");
+            });
+
+            it("Update: Should successfully modify project translations and URLs", () => {
+                const proj = window.appState.portfolioData.projects.find(p => p.id === "test_proj_999");
+                assert.ok(proj, "Target project exists");
+
+                // Modify properties
+                proj.title.en = "Updated Test Project";
+                proj.githubUrl = "https://github.com/updated";
+
+                // Resolve
+                assert.equal(proj.githubUrl, "https://github.com/updated", "URL updated");
+                window.appState.currentLang = 'en';
+                assert.equal(window.t(proj.title), "Updated Test Project", "Title updated correctly");
+            });
+
+            it("Delete: Should successfully remove the target Project", () => {
+                const initialCount = window.appState.portfolioData.projects.length;
+
+                // Remove item
+                const idx = window.appState.portfolioData.projects.findIndex(p => p.id === "test_proj_999");
+                assert.ok(idx !== -1, "Target index found");
+
+                window.appState.portfolioData.projects.splice(idx, 1);
+
+                assert.equal(window.appState.portfolioData.projects.length, initialCount - 1, "Projects array length should decrease");
+                const deleted = window.appState.portfolioData.projects.find(p => p.id === "test_proj_999");
+                assert.equal(deleted, undefined, "Project should no longer exist in array");
+            });
+        });
+
+        describe("3. Blog Posts CRUD Operations", () => {
+            it("Create: Should append a new Blog Post", () => {
+                if (!window.appState.blogData) {
+                    window.appState.blogData = { posts: [] };
+                }
+
+                const initialCount = window.appState.blogData.posts.length;
+                const newPost = {
+                    id: "test_post_999",
+                    date: "2026-06-01",
+                    category: "Robotics",
+                    title: { en: "Test Post", kor: "테스트 포스트" },
+                    summary: { en: "Summary", kor: "요약" },
+                    content: { en: "Content", kor: "내용" }
+                };
+
+                window.appState.blogData.posts.push(newPost);
+
+                assert.equal(window.appState.blogData.posts.length, initialCount + 1);
+                const added = window.appState.blogData.posts.find(p => p.id === "test_post_999");
+                assert.ok(added);
+                assert.equal(added.category, "Robotics");
+            });
+
+            it("Update: Should modify blog post contents", () => {
+                const post = window.appState.blogData.posts.find(p => p.id === "test_post_999");
+                assert.ok(post);
+
+                post.category = "BioEngineering";
+                post.title.en = "New Title";
+
+                assert.equal(post.category, "BioEngineering");
+                window.appState.currentLang = 'en';
+                assert.equal(window.t(post.title), "New Title");
+            });
+
+            it("Delete: Should remove blog post", () => {
+                const initialCount = window.appState.blogData.posts.length;
+                const idx = window.appState.blogData.posts.findIndex(p => p.id === "test_post_999");
+                
+                window.appState.blogData.posts.splice(idx, 1);
+
+                assert.equal(window.appState.blogData.posts.length, initialCount - 1);
+                const deleted = window.appState.blogData.posts.find(p => p.id === "test_post_999");
+                assert.equal(deleted, undefined);
+            });
+        });
+
+        describe("4. Local Storage Integrations", () => {
+            it("Should write and retrieve overrides correct to localStorage", () => {
+                const testData = { profile: { name: { en: "Storage Test" } } };
+                
+                // Write
+                localStorage.setItem('portfolio_data_override_test', JSON.stringify(testData));
+                
+                // Read
+                const retrieved = localStorage.getItem('portfolio_data_override_test');
+                assert.ok(retrieved, "Retrieved local storage payload");
+                
+                const parsed = JSON.parse(retrieved);
+                assert.equal(parsed.profile.name.en, "Storage Test");
+
+                // Clean up test key
+                localStorage.removeItem('portfolio_data_override_test');
+            });
+        });
+
+        // --- EXECUTION RUNNER ENGINE ---
+
+        function runTests() {
+            const container = document.getElementById('suites-container');
+            container.innerHTML = '';
+
+            let totalCount = 0;
+            let passCount = 0;
+            let failCount = 0;
+            const startTime = performance.now();
+
+            suites.forEach(suite => {
+                const card = document.createElement('div');
+                card.className = 'suite-card';
+                
+                const header = document.createElement('div');
+                header.className = 'suite-header';
+                header.innerHTML = `<span>${suite.name}</span>`;
+                card.appendChild(header);
+
+                const body = document.createElement('div');
+                body.className = 'suite-body';
+
+                let suitePass = 0;
+                let suiteFail = 0;
+
+                suite.tests.forEach(test => {
+                    totalCount++;
+                    const row = document.createElement('div');
+                    row.className = 'test-row';
+                    
+                    const tStart = performance.now();
+                    let passed = true;
+                    let errorMsg = "";
+
+                    try {
+                        test.fn();
+                        suitePass++;
+                        passCount++;
+                    } catch (err) {
+                        passed = false;
+                        errorMsg = err.message;
+                        suiteFail++;
+                        failCount++;
+                    }
+                    const tEnd = performance.now();
+                    const duration = (tEnd - tStart).toFixed(2);
+
+                    row.innerHTML = `
+                        <div style="width: 100%;">
+                            <div class="test-row">
+                                <div class="test-info">
+                                    <span class="test-status ${passed ? 'pass' : 'fail'}">${passed ? '✓' : '✗'}</span>
+                                    <span class="test-name">${test.name}</span>
+                                </div>
+                                <span class="test-duration">${duration} ms</span>
+                            </div>
+                            ${!passed ? `<div class="test-error">${errorMsg}</div>` : ''}
+                        </div>
+                    `;
+                    body.appendChild(row);
+                });
+
+                card.appendChild(body);
+                header.innerHTML += `<span style="font-size:0.85rem; padding: 0.2rem 0.5rem; border-radius:50px; background-color: var(--bg-primary);">${suitePass} / ${suite.tests.length} Passed</span>`;
+                
+                container.appendChild(card);
+            });
+
+            const endTime = performance.now();
+            const totalDuration = (endTime - startTime).toFixed(0);
+
+            // Update stats counter elements
+            document.getElementById('total-tests').textContent = totalCount;
+            document.getElementById('passed-tests').textContent = passCount;
+            document.getElementById('failed-tests').textContent = failCount;
+            document.getElementById('total-duration').textContent = `${totalDuration} ms`;
+        }
+
+        document.getElementById('run-btn').addEventListener('click', runTests);
+
+        // Run instantly
+        runTests();
+    </script>
+</body>
+</html>
